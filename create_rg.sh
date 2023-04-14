@@ -27,16 +27,29 @@ readarray -t rg_list < <(echo $(az group list --query "[].name"))
 #CREATE A VARIABLE "rg_name" and "region_name"
 rg_name="Enter Resource Group name"
 region_name="Enter Region name"
+rg_owner="Enter the resource group owner"
+rg_date="Enter date created"
+rg_env="Enter the environment name"
+
 echo -e "\n$rg_name"
 read resource_group
 
 echo -e "\n$region_name"
 read region
 
+echo -e "\n$rg_owner"
+read Owner
+
+echo -e "\n$rg_date"
+read Date_Created
+
+echo -e "\n$rg_env"
+read Environment
+
 #CHECK IF THE RESOURCE GROUP EXIST ELSE CREATE A NEW ONE
 if [[ "${rg_list[@]}" =~ "$resource_group" ]]
 then
 	echo "Resource Group exit"
 else
-	echo $(az group create -l $region -n $resource_group)
+	echo $(az group create -l $region -n $resource_group --tags Owner="$Owner" Date_Created=$Date_Created Environment="$Environment")
 fi
