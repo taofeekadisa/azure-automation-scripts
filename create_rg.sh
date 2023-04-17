@@ -5,18 +5,16 @@
 #READ THE ACCOUNT NAMES INTO A LIST "sub_list"
 readarray -t sub_list < <(echo $(az account list --query "[].name"))
 
-#CREATE A VARIABLE "subscription_name"
-sub_name1="Enter your subscription name"
 
-#CREATE AN INPUT FUNCTION TO ALLOW USER ENTER A SUBSCRIPTION NAME
-echo -e "\n $sub_name1"
-read SUB_NAME
+#CREATE a VARIABLE TO STORE THE SUBSCRIPTION
+SUB_NAME="ADISA Taofeek"
 
 #CHECK ID THE SUBSCRIPTION NAME EXIT ELSE CREATE A NEW ONE
 
 if  [[ "${sub_list[@]}" =~ "$SUB_NAME" ]]
 then
 	echo $(az account set -s "$SUB_NAME")
+	echo -e "\nAccount Set to $SUB_NAME Successfully"
 else
 	echo "Subscription name does not exit"
 fi
@@ -25,31 +23,16 @@ fi
 readarray -t rg_list < <(echo $(az group list --query "[].name"))
 
 #CREATE A VARIABLE "rg_name" and "region_name"
-rg_name="Enter Resource Group name"
-region_name="Enter Region name"
-rg_owner="Enter the resource group owner"
-rg_date="Enter date created"
-rg_env="Enter the environment name"
-
-echo -e "\n$rg_name"
-read resource_group
-
-echo -e "\n$region_name"
-read region
-
-echo -e "\n$rg_owner"
-read Owner
-
-echo -e "\n$rg_date"
-read Date_Created
-
-echo -e "\n$rg_env"
-read Environment
+resource_group=hator-dev-rg
+region=eastus2
+#Tags
+Owner=hator-dev
+Environment=dev
 
 #CHECK IF THE RESOURCE GROUP EXIST ELSE CREATE A NEW ONE
 if [[ "${rg_list[@]}" =~ "$resource_group" ]]
 then
 	echo "Resource Group exit"
 else
-	echo $(az group create -l $region -n $resource_group --tags Owner="$Owner" Date_Created=$Date_Created Environment="$Environment")
+	echo $(az group create -l $region -n $resource_group --tags Owner="$Owner"  Environment="$Environment")
 fi
