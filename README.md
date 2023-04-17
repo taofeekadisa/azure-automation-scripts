@@ -1,6 +1,7 @@
 This azure-automation-scripts is a repository containing bash scripts for automating resource deployment and management in Microsoft Azure.
 
 PROJECT CASE STUDY
+
 Hators Corporation is a healthcare company that serves over 1 billion users worldwide with all employees working remotely. The company has requested the provisioning of Linux virtual machines in Azure for a 3-tier infrastructure setup (Web, API, and Database) to serve as a testing environment for the development team. The VMs needs to be deployed with all required components which include the networking and storage resources. 
 Engineering Team Delivery:
 The Knixat Cloud Engineering team has been tasked to deploy the virtual machine on Azure through the portal. All resources required for the virtual machine are currently non-existent and needs to be deployed. 
